@@ -28,8 +28,8 @@
   <%end%>
   <%= link_to 'Back', posts_path %> <br>
 
-  <% likes = Like.all%>
-  <h3>Likers</h3>
+  <% likes = Like.where(post_id: @post.id,user_id:current_user.id)%>
+  <h3>Likers (<%=likes.size()%>)</h3>
   <%for like in likes%>   
     <%= like.user.email %> | <br>
   <%end%>
