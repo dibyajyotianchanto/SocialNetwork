@@ -20,10 +20,23 @@
   <%= @post.user.email %>
 </p>
 
-<% if current_user==@post.user%>
-  <%= link_to 'Edit', edit_post_path(@post) %> |
+<% if current_user%>
+  <%= link_to 'Like Post', new_like_path(:post_id => @post.id,:user_id => current_user.id) %> |
+  <%= link_to 'Unlike Post', unlikepost_path(:post_id => @post.id,:user_id => current_user.id) %> | 
+  <% if current_user==@post.user%>
+      <%= link_to 'Edit', edit_post_path(@post) %> |
+  <%end%>
+  <%= link_to 'Back', posts_path %> <br>
+
+  <% likes = Like.all%>
+  <h3>Likers</h3>
+  <%for like in likes%>   
+    <%= like.user.email %> | <br>
+  <%end%>
+  
 <%end%>
-<%= link_to 'Back', posts_path %>
+
+
 
   <h1>All Comments</h1>
 
