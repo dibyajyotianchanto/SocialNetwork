@@ -12,6 +12,38 @@
       <th colspan="3"></th>
     </tr>
   </thead>
+  <%if @user==current_user%>
+  <%else%>
+    <%friendship_a = Friendship.where(sender_id: @user.id, receiver_id: current_user.id)%>
+    <%if(friendship_a.size()>0)%>
+      <%if (friendship_a[0].status==0)%>
+        <p><%=@user.email%> has sent you a friend request</p>
+        <%= link_to 'Accept Friend Request', accept_friend_request_path(:user_id => @user.id) %> |
+        <%= link_to 'Reject Friend Request', reject_friend_request_path(:user_id => @user.id) %>
+      <%else%>
+        <p>You and <%=@user.email%> are friends</p>
+        <%= link_to 'Unfriend', unfriend_friend_request_path(:user_id => @user.id) %>
+      <%end%>     
+    <%end%>
+
+    <%friendship_b = Friendship.where(sender_id: current_user.id, receiver_id: @user.id)%>
+
+    <%if(friendship_b.size()>0)%>
+      <%if (friendship_b[0].status==0)%>
+        <p>You have sent <%=@user.email%> a friend request  |
+          <%= link_to 'Withdraw Friend Request', unsend_friend_request_path(:user_id => @user.id)%>
+        </p>
+      <%else%>
+        <p>You and <%=@user.email%> are friends |
+        <%= link_to 'Unfriend', unfriend_friend_request_path(:user_id => @user.id) %>
+        </p>
+      <%end%>     
+    <%end%>
+
+    <% if friendship_b.size()==0 && friendship_a.size()==0%>
+      <%= link_to 'Send Friend Request', send_friend_request_path(:user_id => @user.id) %>
+    <%end%>
+  <%end%>
 
   <tbody>
     
