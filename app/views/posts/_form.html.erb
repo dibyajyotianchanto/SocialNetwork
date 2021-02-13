@@ -1,4 +1,5 @@
 <%= form_with(model: post) do |form| %>
+<div class="form-group">
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -12,27 +13,30 @@
   <% end %>
   <%select_list = { 'Public': 1, 'Only for Friends': 0 }%>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field m-4">
+
+    <%= form.label :name , class: "col-md-4 control-label"%>
+    <div class="col-md-8"> <%= form.text_field :name, class: "form-control" %> </div>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="field m-4">
+    <%= form.label :title , class: "col-md-4 control-label"%>
+    <div class="col-md-8"> <%= form.text_field :title, class: "form-control"  %> </div>
   </div>
 
- <div class="field">
-  <%= form.label :visibility %>
-    <%= form.select :visibility, select_list , { prompt: "Choose Visibilty" }%>
+ <div class="field m-4">
+    <%= form.label :visibility , class: "col-md-4 control-label"%>
+    <div class="col-md-8"> <%= form.select :visibility, select_list , { prompt: "Choose Visibilty" }, class: "form-control" %> </div>
   </div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <div class="field m-4">
+    <%= form.label :content , class: "col-md-4 control-label"%>
+    <div class="col-md-8"> <%= form.text_area :content , class: "form-control" %> </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="m-4">
+     <%= form.submit %> 
   </div>
+  
+</div>
 <% end %>

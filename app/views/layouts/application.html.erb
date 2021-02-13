@@ -3,24 +3,60 @@
   <head>
     <title>SocialNetwork</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <style>
+    a {
+      color: inherit !important;
+    }
+    </style>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>-->
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= link_to "Sign Up", new_user_registration_path if !current_user %>
-  <%= link_to "Sign In", new_user_session_path if !current_user %>
-  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete if current_user %>
-  <%= link_to "Me", user_path(current_user.id) if current_user %>
-  <%= link_to "My Friend Requests", all_friend_request_path if current_user %>
-  <%= link_to "Posts", posts_path%>
+  <div class="container">
+  <%if notice %>
+    <div id="notice" class="alert alert-success m-2" role="alert"><%= notice %></div>
+  <%end%>
+   <%if alert %>
+    <div id="alert" class="alert alert-danger m-2" role="alert"><%= alert %></div>
+  <%end%>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+
+   <%if !current_user %>
+    <li class="nav-item nav-link"><%= link_to "Sign Up", new_user_registration_path  %></li>
+    <li class="nav-item nav-link"><%= link_to "Sign In", new_user_session_path%></li>
+  <%end%>
+  
+    <li class="nav-item nav-link"> <%= link_to "Sign Out", destroy_user_session_path, :method => :delete if current_user %> </li>
+  <%if current_user %>
+    <li class="nav-item nav-link"> <%= link_to "Me", user_path(current_user.id)  %> </li>
+    <li class="nav-item nav-link"> <%= link_to "My Friend Requests", all_friend_request_path %> </li>
+  <%end%>
+    <li class="nav-item nav-link"> <%= link_to "Posts", posts_path%></li>
+  </ul>
+</div>
+</nav>
+
+
+
+
   <%#= link_to "Change Password", edit_user_password_path if !current_user %>
   
     <%= yield %>
+    </div>
   </body>
 </html>
