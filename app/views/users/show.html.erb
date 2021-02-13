@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to @user.email + '\'s Friends', friend_list_path(:user_id => @user.id) %>
+<%= link_to @user.fullname + '\'s Friends', friend_list_path(:user_id => @user.id) %>
 
-<h1><%=@user.email%></h1>
+<h1><%=@user.fullname%></h1>
 
 <table>
   <thead>
@@ -19,11 +19,11 @@
     <%friendship_a = Friendship.where(sender_id: @user.id, receiver_id: current_user.id)%>
     <%if(friendship_a.size()>0)%>
       <%if (friendship_a[0].status==0)%>
-        <p><%=@user.email%> has sent you a friend request</p>
+        <p><%=@user.fullname%> has sent you a friend request</p>
         <%= link_to 'Accept Friend Request', accept_friend_request_path(:user_id => @user.id) %> |
         <%= link_to 'Reject Friend Request', reject_friend_request_path(:user_id => @user.id) %>
       <%else%>
-        <p>You and <%=@user.email%> are friends</p>
+        <p>You and <%=@user.fullname%> are friends</p>
         <%= link_to 'Unfriend', unfriend_friend_request_path(:user_id => @user.id) %>
       <%end%>     
     <%end%>
@@ -32,11 +32,11 @@
 
     <%if(friendship_b.size()>0)%>
       <%if (friendship_b[0].status==0)%>
-        <p>You have sent <%=@user.email%> a friend request  |
+        <p>You have sent <%=@user.fullname%> a friend request  |
           <%= link_to 'Withdraw Friend Request', unsend_friend_request_path(:user_id => @user.id)%>
         </p>
       <%else%>
-        <p>You and <%=@user.email%> are friends |
+        <p>You and <%=@user.fullname%> are friends |
         <%= link_to 'Unfriend', unfriend_friend_request_path(:user_id => @user.id) %>
         </p>
       <%end%>     
@@ -55,7 +55,7 @@
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         
-        <td><%= link_to post.user.email , user_path(post.user.id) %></td>
+        <td><%= link_to post.user.fullname , user_path(post.user.id) %></td>
         <td><%= link_to 'Show', post %></td>
         <% if current_user==post.user%>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>

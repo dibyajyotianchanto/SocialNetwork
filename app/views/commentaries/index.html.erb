@@ -16,7 +16,7 @@
     <% @commentaries.each do |commentary| %>
       <tr>
         <td><%= commentary.content %></td>
-        <td><%= commentary.user_id %></td>
+        <td><%= commentary.user.fullname %></td>
         <td><%= commentary.post_id %></td>
         <td><%= link_to 'Show', commentary %></td>
         <td><%= link_to 'Edit', edit_commentary_path(commentary) %></td>

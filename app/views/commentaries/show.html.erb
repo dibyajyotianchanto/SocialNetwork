@@ -6,13 +6,18 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @commentary.user_id %>
+  <strong>Commenter:</strong>
+  <%= @commentary.user.fullname %>
 </p>
 
 <p>
   <strong>Post:</strong>
-  <%= @commentary.post_id %>
+  <%= @commentary.post.name %>
+</p>
+
+<p>
+  <strong>Post Author:</strong>
+  <%= @commentary.post.user.fullname %>
 </p>
 
 <p>

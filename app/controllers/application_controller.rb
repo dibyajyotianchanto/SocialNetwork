@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     if(post.visibility == 1)
         return true
     end
-    
+
       if !authenticate_user!
         return false
       end
@@ -23,4 +23,11 @@ class ApplicationController < ActionController::Base
           end
       end
     end
+
+    before_action :configure_permitted_parameters, if: :devise_controller?
+
+    protected
+      def configure_permitted_parameters
+         devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname])
+      end
 end

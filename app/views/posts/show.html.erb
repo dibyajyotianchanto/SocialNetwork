@@ -17,7 +17,7 @@
 
 <p>
   <strong>Creator:</strong>
-  <%= @post.user.email %>
+  <%= @post.user.fullname %>
 </p>
 
 <% if current_user%>
@@ -31,7 +31,7 @@
   <% likes = Like.where(post_id: @post.id,user_id:current_user.id)%>
   <h3>Likers (<%=likes.size()%>)</h3>
   <%for like in likes%>   
-    <%= like.user.email %> | <br>
+    <%= like.user.fullname %> | <br>
   <%end%>
   
 <%end%>
@@ -51,7 +51,7 @@
 
       <p>
         <strong>User:</strong>
-        <%= comment.user.email %>
+        <%= comment.user.fullname %>
       </p>
 
 
