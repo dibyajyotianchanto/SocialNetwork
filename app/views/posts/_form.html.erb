@@ -21,6 +21,12 @@
     <%= form.text_field :title %>
   </div>
 
+ <div class="field">
+  <%= form.label :visibility %>
+    <p>Choose 1 for public, Choose 0 for Friends Only</p>
+  <%= form.select :visibility, options_for_select(0..1), { prompt: "Choose Visibilty" } %>
+  </div>
+
   <div class="field">
     <%= form.label :content %>
     <%= form.text_area :content %>

@@ -1,0 +1,8 @@
+<h2><%=User.find(@user_id).email%>'s friendlist</h2>
+<h4><%=@users.size()%> friends in total</h4>
+
+<%@users.each do |user|%>
+    <p><%= link_to user.email , user_path(user.id) %></p>
+<%end%>
+
+<td><%= link_to 'Back', user_path(@user_id) %></td>

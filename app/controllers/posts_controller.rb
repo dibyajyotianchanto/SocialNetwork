@@ -4,12 +4,20 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts_all = Post.all
+    @posts = []
+    for post in @posts_all do
+      if test_post_visibility(post)
+        @posts.append(post)
+      end
+    end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
-    
+    if test_post_visibility(@post) == false
+      redirect_to posts_path
+    end
   end
 
   # GET /posts/new
@@ -75,6 +83,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:name, :title, :content)
+      params.require(:post).permit(:name, :title, :content, :visibility)
     end
 end

@@ -66,6 +66,20 @@ class FriendshipsController < ApplicationController
         redirect_to user_path(@user_id)
     end
 
+    def friendlist
+        @user_id = params[:user_id]
+        @first = Friendship.where(sender_id: @user_id, status:1).select('receiver_id')
+        @second = Friendship.where(receiver_id: @user_id, status:1).select('sender_id')
+        @users = []
+        for friendship in @first do
+            @users.append(User.find(friendship.receiver_id))
+        end
+
+        for friendship in @second do
+            @users.append(User.find(friendship.sender_id))
+        end
+    end
+
     # def redirect_to_back(default = root_url)
     #       redirect_to :back
     # end

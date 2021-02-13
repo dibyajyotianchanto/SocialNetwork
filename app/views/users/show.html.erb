@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to @user.email + '\'s Friends', friend_list_path(:user_id => @user.id) %>
+
 <h1><%=@user.email%></h1>
 
 <table>
