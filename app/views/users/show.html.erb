@@ -15,6 +15,7 @@
     </tr>
   </thead>
   <%if @user==current_user%>
+    <%= link_to 'Edit My Profile', edit_user_registration_path %>
   <%else%>
     <%friendship_a = Friendship.where(sender_id: @user.id, receiver_id: current_user.id)%>
     <%if(friendship_a.size()>0)%>
