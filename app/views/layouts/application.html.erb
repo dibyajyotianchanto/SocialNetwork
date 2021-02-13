@@ -17,6 +17,7 @@
   <%= link_to "Sign In", new_user_session_path if !current_user %>
   <%= link_to "Sign Out", destroy_user_session_path, :method => :delete if current_user %>
   <%= link_to "Me", user_path(current_user.id) if current_user %>
+  <%= link_to "My Friend Requests", all_friend_request_path if current_user %>
   <%= link_to "Posts", posts_path%>
   <%#= link_to "Change Password", edit_user_password_path if !current_user %>
   

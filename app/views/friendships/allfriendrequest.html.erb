@@ -1,0 +1,8 @@
+<h2>Your Friend Requests</h2>
+<h4><%=@users.size()%> friend-requests in total</h4>
+
+<%@users.each do |user|%>
+    <p><%= link_to user.email , user_path(user.id) %></p>
+<%end%>
+
+<td><%= link_to 'Back', user_path(current_user.id) %></td>

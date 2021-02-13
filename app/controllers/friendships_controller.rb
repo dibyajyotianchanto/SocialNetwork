@@ -80,6 +80,14 @@ class FriendshipsController < ApplicationController
         end
     end
 
+    def allfriendrequest
+        @friend_requests = Friendship.where(receiver_id: current_user.id, status:0).select('sender_id')
+        @users = []
+        for friendship in @friend_requests do
+            @users.append(User.find(friendship.sender_id))
+        end
+    end
+
     # def redirect_to_back(default = root_url)
     #       redirect_to :back
     # end
