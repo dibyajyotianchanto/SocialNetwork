@@ -1,4 +1,4 @@
-
+<!--
 
 <p>
   <strong>Content:</strong>
@@ -32,3 +32,63 @@
 
 <%= link_to 'Edit', edit_commentary_path(@commentary) %> |
 <%= link_to 'Back', post_path(@commentary.post_id ) %>
+
+-->
+
+<div class="card m-2"> 
+  <div class="card-body">  
+    <p class="card-text"><%= @commentary.content %></p>
+  </div>
+</div>
+
+
+
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Commenter</th>
+      
+      <th scope="col">Post</th>
+      <th scope="col">Author</th>
+      <th scope="col">Creation Time</th>
+      <th scope="col">Updation Time</th>
+      <th scope="col">Action(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    <tr>
+      
+
+      <td>
+        <%= link_to @commentary.user.fullname , user_path(@commentary.user.id) %> 
+      </td>
+
+      
+      <td>
+        <%= @commentary.post.name %>
+      </td>
+
+      <td>
+         <%= link_to @commentary.post.user.fullname , user_path(@commentary.post.user.id) %> 
+      </td>
+
+      <td>
+        <%=  @commentary.created_at %>
+      </td>
+
+      <td>
+        <%=  @commentary.updated_at %>
+      </td>
+
+      <td>
+      <%if @commentary.user==current_user%>
+        <div class="btn btn-warning"> <%= link_to 'Edit', edit_commentary_path(@commentary) %> </div>
+        <div class="btn btn-danger"><%= link_to 'Back', post_path(@commentary.post_id ) %></div>
+      <%end%>
+      </td>
+      </tr>
+ 
+    </tbody>
+    </table>

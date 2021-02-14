@@ -1,4 +1,5 @@
 <%= form_with(model: commentary) do |form| %>
+<div class="form-group">
   <% if commentary.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(commentary.errors.count, "error") %> prohibited this commentary from being saved:</h2>
@@ -11,22 +12,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <div class="field m-4">
+    <%= form.label :content , class: "col-md-4 control-label"%>
+     <div class="col-md-8">  <%= form.text_area :content  , class: "form-control"%> </div>
   </div>
 
-  <div class="field" hidden>
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, value:current_user.id %>
+  <div class="field m-4" hidden>
+    <%= form.label :user_id , class: "col-md-4 control-label" %>
+     <div class="col-md-8">  <%= form.number_field :user_id, value:current_user.id  , class: "form-control"%> </div>
   </div>
 
-  <div class="field" hidden>
-    <%= form.label :post_id %>
-    <%= form.number_field :post_id, value:@post_id%>
+  <div class="field m-4" hidden>
+    <%= form.label :post_id , class: "col-md-4 control-label"%>
+     <div class="col-md-8">  <%= form.number_field :post_id, value:@post_id  , class: "form-control"%> </div>
   </div>
 
-  <div class="actions">
+  <div class="form-group">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>

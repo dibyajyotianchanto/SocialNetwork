@@ -4,7 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :fullname %><br />
+    <%= f.label :fullname , 'Full Name' %><br />
     <%= f.text_field :fullname, autofocus: true %>
   </div>
 
@@ -25,10 +25,11 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
 
+<br>
 <%= render "devise/shared/links" %>

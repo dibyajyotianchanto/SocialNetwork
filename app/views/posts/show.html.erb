@@ -1,79 +1,89 @@
 
 
-<p>
-  <strong>Name:</strong>
-  <%= @post.name %>
-</p>
+<div class="card m-2">
+  <h5 class="card-header"><%= @post.name %></h5>
+  <div class="card-body">
+    <h5 class="card-title">S<%= @post.title %></h5>
+    <p class="card-text"><%= @post.content %></p>
+    <div class="btn btn-dark"> <%= link_to @post.user.fullname , user_path(@post.user.id) %> </div>
+  </div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<p>
-  <strong>Creator:</strong>
-  <%= @post.user.fullname %>
-</p>
 
 <% if current_user%>
-  <%= link_to 'Like Post', new_like_path(:post_id => @post.id,:user_id => current_user.id) %> |
-  <%= link_to 'Unlike Post', unlikepost_path(:post_id => @post.id,:user_id => current_user.id) %> | 
+  <div class="btn btn-success"> <%= link_to 'Like Post', new_like_path(:post_id => @post.id,:user_id => current_user.id) %> </div>
+  <div class="btn btn-danger"> <%= link_to 'Unlike Post', unlikepost_path(:post_id => @post.id,:user_id => current_user.id) %> </div>
   <% if current_user==@post.user%>
-      <%= link_to 'Edit', edit_post_path(@post) %> |
+    <div class="btn btn-warning">  <%= link_to 'Edit', edit_post_path(@post) %> </div>
   <%end%>
-  <%= link_to 'Back', posts_path %> <br>
+  <div class="btn btn-dark"><%= link_to 'Back', posts_path %> </div><br>
 
   <% likes = Like.where(post_id: @post.id,user_id:current_user.id)%>
-  <h3>Likers (<%=likes.size()%>)</h3>
-  <%for like in likes%>   
-    <%= like.user.fullname %> | <br>
-  <%end%>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Likers (<%=likes.size()%>)</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <%for like in likes%>   
+      <td>  <%= link_to like.user.fullname , user_path(like.user.id) %>  </td>
+    <%end%>
+   </tr>
+  </tbody>
+</table>
   
 <%end%>
 
 
 
-  <h1>All Comments</h1>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Commenter</th>
+      <th scope="col">Comment</th>
+      <th scope="col">Time</th>
+      <th scope="col">Action(s)</th>
+    </tr>
+  </thead>
+  <tbody>
 
   <% comments = Commentary.all%>
 
   <%for comment in comments%>
     <%if comment.post == @post%>
-      <p>
-        <strong>Comment:</strong>
+    <tr>
+      
+
+      <td>
+        <%= link_to comment.user.fullname , user_path(comment.user.id) %> 
+      </td>
+
+      <td>
         <%= comment.content %>
-      </p>
-
-      <p>
-        <strong>User:</strong>
-        <%= comment.user.fullname %>
-      </p>
+      </td>
 
 
-      <p>
-        <strong>Created At:</strong>
-        <%= comment.created_at %>
-      </p>
-
-      <p>
-        <strong>Updated At:</strong>
+      <td>
         <%= comment.updated_at %>
-      </p>
+      </td>
+
+      <td>
       <%if comment.user==current_user%>
-        <%= link_to 'Edit', edit_commentary_path(comment) %> 
-        <%= link_to 'Delete', commentary_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <div class="btn btn-warning"> <%= link_to 'Edit', edit_commentary_path(comment) %> </div>
+        <div class="btn btn-danger"><%= link_to 'Delete', commentary_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <%end%>
-      <br>
+      </td>
+      </tr>
       <%end%>
     <%end%>
+    </tbody>
+    </table>
 
-    <h1>Comment on the Post</h1>
-    <%= link_to 'Comment Here', new_commentary_path( :post_id => @post.id)%> 
+    <div class="btn btn-success"> <%= link_to 'Write a comment on the Post', new_commentary_path( :post_id => @post.id)%> </div>
     
 
 
