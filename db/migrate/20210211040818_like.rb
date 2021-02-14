@@ -1,4 +1,4 @@
-class Like < ActiveRecord::Migration[6.1]
+class LikeCreate < ActiveRecord::Migration[6.1]
   def change
     create_table :likes do |t|
       t.integer :user_id
