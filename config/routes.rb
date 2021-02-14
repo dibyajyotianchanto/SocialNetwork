@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get '/friendunfriend', to: 'friendships#unfriendfriendship', as: :unfriend_friend_request
   get '/friendlist', to: 'friendships#friendlist', as: :friend_list
   get '/allfriendrequest', to: 'friendships#allfriendrequest', as: :all_friend_request
+  get '/searchpeople', to: 'friendships#searchpeople', as: :search_people
 end

@@ -17,3 +17,5 @@
 * Friendship Module
 
 * Public and Friend's Only Posts
+
+* User search box

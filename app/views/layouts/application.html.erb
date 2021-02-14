@@ -48,6 +48,10 @@
   <%end%>
     <li class="nav-item nav-link"> <%= link_to "Posts", posts_path%></li>
   </ul>
+  <%= form_tag(search_people_path, method: 'get') do %>
+        <%= text_field_tag(:search, params[:search])%>
+        <%= submit_tag("Search", name: nil) %>
+  <% end %>
 </div>
 </nav>
 
@@ -58,5 +62,9 @@
   
     <%= yield %>
     </div>
+    <footer class="bg-light text-center text-lg-start">
+        <p>Developed by Dibyajyoti Dhar, Software Engineering Intern at Ruby on Rails team, Anchanto, Pune</p>
+        <p><a href="mailto:dibyajyoti.dhar@anchanto.com">dibyajyoti.dhar@anchanto.com</a></p>
+    </footer>
   </body>
 </html>

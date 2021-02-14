@@ -88,6 +88,15 @@ class FriendshipsController < ApplicationController
         end
     end
 
+    def searchpeople
+        session[:return_to] ||= request.referer
+        @search = params[:search].squish
+        if @search==""
+            redirect_to session.delete(:return_to)
+        end
+        @users = User.where("fullname like ?", "%#{@search}%")
+    end
+
     # def redirect_to_back(default = root_url)
     #       redirect_to :back
     # end
