@@ -3,7 +3,7 @@
 <div class="card m-2">
   <h5 class="card-header"><%= @post.name %></h5>
   <div class="card-body">
-    <h5 class="card-title">S<%= @post.title %></h5>
+    <h5 class="card-title"><%= @post.title %></h5>
     <p class="card-text"><%= @post.content %></p>
     <div class="btn btn-dark"> <%= link_to @post.user.fullname , user_path(@post.user.id) %> </div>
   </div>
