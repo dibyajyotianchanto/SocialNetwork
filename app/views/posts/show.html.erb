@@ -28,11 +28,13 @@
     </tr>
   </thead>
   <tbody>
-   <tr>
-    <%for like in likes%>   
+   
+    <%for like in likes%>
+    <tr>
       <td>  <%= link_to like.user.fullname , user_path(like.user.id) %>  </td>
+    </tr>
     <%end%>
-   </tr>
+   
   </tbody>
 </table>
   
