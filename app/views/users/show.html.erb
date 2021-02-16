@@ -2,6 +2,21 @@
 <div class="btn btn-primary"><%= link_to @user.fullname + '\'s Friends', friend_list_path(:user_id => @user.id) %></div>
 
 <h1><%=@user.fullname%></h1>
+<%image = Image.where(user_id: @user.id)%>
+
+<%if image.size()==0%>
+    <img src="https://via.placeholder.com/200/">
+    <%if @user==current_user%>  
+        <div class="btn btn-warning"><%= link_to 'Upload Profile Picture', new_image_path %></div>
+    <%end%>
+
+<%else%>
+    <img src="<%=image[0].picture%>">
+    <%if @user==current_user%> 
+        <div class="btn btn-warning"><%= link_to 'Change Profile Picture', edit_image_path(image[0].id) %></div>
+        <div class="btn btn-danger"><%= link_to 'Delete Profile Picture', image[0], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    <%end%>
+<%end%>
 
 
   <%if @user==current_user%>  

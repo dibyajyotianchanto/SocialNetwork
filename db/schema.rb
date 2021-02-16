@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_180444) do
+ActiveRecord::Schema.define(version: 2021_02_16_134334) do
 
   create_table "commentaries", force: :cascade do |t|
     t.text "content"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2021_02_13_180444) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "name"
+    t.string "picture"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_images_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -58,4 +67,5 @@ ActiveRecord::Schema.define(version: 2021_02_13_180444) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "images", "users"
 end

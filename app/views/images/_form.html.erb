@@ -1,0 +1,110 @@
+<%= form_for @image, :html => { :class => "form-horizontal image" } do |f| %>
+
+  <% if @image.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group" hidden>
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture, 'Choose Profile Picture', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <input id="upload-Image" type="file" onchange="loadImageFile();"/>
+    </div>
+  </div>
+
+  <div class="form-group" hidden>
+    <%= f.label :picture, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :picture, :class => 'form-control' , :id => "picture_image", :required => true%>
+    </div>
+    <%=f.error_span(:picture) %>
+  </div>
+
+  <div class="form-group" hidden>
+    <%= f.label :user_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :user_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:user_id) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                images_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
+
+<img id="original-Img" hidden/>
+<img id="upload-Preview" hidden/>
+
+
+<script type="text/javascript">
+var fileReader = new FileReader();
+var filterType = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+fileReader.onload = function (event) {
+  var image = new Image();
+  
+  image.onload=function(){
+      document.getElementById("original-Img").src=image.src;
+      var canvas=document.createElement("canvas");
+      var context=canvas.getContext("2d");
+      canvas.width=200;
+      canvas.height=200;
+      context.drawImage(image,
+          0,
+          0,
+          image.width,
+          image.height,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+      );
+      
+      document.getElementById("upload-Preview").src = canvas.toDataURL();
+      document.getElementById("picture_image").value = canvas.toDataURL();
+  }
+  image.src=event.target.result;
+};
+
+var loadImageFile = function () {
+  var uploadImage = document.getElementById("upload-Image");
+  
+  //check and retuns the length of uploded file.
+  if (uploadImage.files.length === 0) { 
+    return; 
+  }
+  
+  //Is Used for validate a valid file.
+  var uploadFile = document.getElementById("upload-Image").files[0];
+  if (!filterType.test(uploadFile.type)) {
+    alert("Please select a valid image."); 
+    return;
+  }
+  
+  fileReader.readAsDataURL(uploadFile);
+  //document.getElementById("upload-Image").
+}
+</script>
