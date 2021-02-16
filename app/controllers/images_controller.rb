@@ -4,11 +4,12 @@ class ImagesController < ApplicationController
 
   # GET /images or /images.json
   def index
-    @images = Image.all
+    format.html { redirect_to user_path(current_user.id), notice: "Profile picture was successfully created." }
   end
 
   # GET /images/1 or /images/1.json
   def show
+    format.html { redirect_to user_path(@image.user), notice: "Profile picture was successfully created." }
   end
 
   # GET /images/new

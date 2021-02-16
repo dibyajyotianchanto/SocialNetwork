@@ -19,3 +19,5 @@
 * Public and Friend's Only Posts
 
 * User search box
+
+* Profile Picture Updated
